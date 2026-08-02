@@ -19,10 +19,11 @@ public:
         q.push({root, 0});
         while(!q.empty()){
             int size = q.size();
-            unsigned int min_id = q.front().second;
+            // unsigned int min_id = q.front().second;
             unsigned int first = 0, last = 0;
             for(int i =0; i< size; ++i){
-                unsigned int curr_id = q.front().second - min_id;
+                // unsigned int curr_id = q.front().second - min_id;
+                unsigned int curr_id = q.front().second;
                 TreeNode* node = q.front().first;
                 q.pop();
                 if(i == 0)  first = curr_id;
