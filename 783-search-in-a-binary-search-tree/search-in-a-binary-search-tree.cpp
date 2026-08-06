@@ -22,8 +22,12 @@ public:
                 ans = curr;
                 break;
             }
-            if(curr->left)  q.push(curr->left);
-            if(curr->right) q.push(curr->right);
+            if(val < curr->val){
+                if(curr->left)  q.push(curr->left);
+            }
+            else {
+                if(curr->right) q.push(curr->right);
+            }
         }
         return ans;
     }
