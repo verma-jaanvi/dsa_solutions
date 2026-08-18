@@ -9,7 +9,7 @@ public:
         for(int i =0; i< len; i++){
             auto it = mpp.find(s[i]);
             if(it != mpp.end() && it->second == 1){
-                ans = max(ans, (i-j));
+                // ans = max(ans, (i-j));
                 while(it->second > 0){
                     mpp[s[j++]]--;
                 }
