@@ -1,35 +1,42 @@
 class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
-        //bfs
+        
         int n = grid.size();
         int m = grid[0].size();
-        queue<pair<int, int>> q;
-        int count = 0;
-        vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
-        for(int i =0; i<n; ++i){
-            for(int j=0; j<m; ++j){
+        int cnt = 0;
+        for(int i = 0; i< n; ++i){
+            for(int j = 0; j< m; ++j){
                 if(grid[i][j] == '1'){
-                    count++;
+                    cnt++;
                     queue<pair<int, int>> q;
                     q.push({i, j});
                     grid[i][j] = '0';
                     while(!q.empty()){
-                        auto [r, c] = q.front();
+                        int r = q.front().first;
+                        int c = q.front().second;
                         q.pop();
-                        for(auto dir : directions){
-                            int nr = r+dir.first;
-                            int nc = c+dir.second;
-                            if(nr >= 0 && nr < n && nc >=0 && nc < m && grid[nr][nc] == '1'){
-                                q.push({nr, nc});
-                                grid[nr][nc] = '0';
-                            }
+                        if(r< n-1 && grid[r+1][c] == '1'){   
+                            q.push({r+1, c});
+                            grid[r+1][c] = '0';
                         }
+                        if(c< m-1 && grid[r][c+1] == '1'){   
+                            q.push({r, c+1});
+                            grid[r][c+1] = '0';
+                        }
+                        if(r > 0 && grid[r-1][c] == '1'){   
+                            q.push({r-1, c});
+                            grid[r-1][c] = '0';
+                        }
+                        if(c > 0 && grid[r][c-1] == '1'){   
+                            q.push({r, c-1});
+                            grid[r][c-1] = '0';
+                        }
+
                     }
                 }
             }
         }
-        return count;
+        return cnt;
     }
 };
