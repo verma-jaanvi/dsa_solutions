@@ -11,21 +11,22 @@
  */
 class Solution {
 public:
-    int maxdia = 0;
-
-    int height(TreeNode* root){
-        if(root == NULL)   return 0;
-        int lht = height(root->left);
-        int rht = height(root->right);
-        maxdia = max(maxdia, lht+rht);
-        return 1 + max(lht, rht);
+    int dia = 0;
+    
+    int diameter(TreeNode* root){
+        if(!root)   return 0;
+        int lt = 0, rt = 0;
+        lt = max(lt, diameter(root->left)) + 1;
+        rt = max(rt, diameter(root->right)) +1;
+        dia = max(dia, lt+rt+1);
+        return max(lt, rt);
     }
 
+
     int diameterOfBinaryTree(TreeNode* root) {
-        // dfs + bfs
-        
-        // longest path on left + longest path on right from same parent node 
-        height(root);
-        return maxdia;
+        //dfs;
+        // if(!root)   return 0;
+        diameter(root);
+        return dia-3;
     }
 };
