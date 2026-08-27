@@ -1,13 +1,13 @@
 class Solution {
 public:
-    int fn(int i , int j, vector<vector<int>> &vec){
-        if(i == vec.size()-1) return vec[i][j];
-        int mini = fn(i+1, j, vec);
-        // if(j>0) mini = min(mini, fn(i+1, j-1, vec));
-        mini = min(mini, fn(i+1, j+1, vec));
-        return mini + vec[i][j];
+    // int fn(int i , int j, vector<vector<int>> &vec){
+    //     if(i == vec.size()-1) return vec[i][j];
+    //     int mini = fn(i+1, j, vec);
+    //     // if(j>0) mini = min(mini, fn(i+1, j-1, vec));
+    //     mini = min(mini, fn(i+1, j+1, vec));
+    //     return mini + vec[i][j];
 
-    }
+    // }
 
     int minimumTotal(vector<vector<int>>& triangle) {
         int n = triangle.size();
