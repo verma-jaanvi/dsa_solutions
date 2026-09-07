@@ -9,32 +9,33 @@
  */
 class Solution {
 public:
-    bool fn(TreeNode* root, TreeNode* p, vector<TreeNode*> &p1){
-        if(root == NULL)    return false;
-        p1.push_back(root);
+    bool fn(TreeNode* root, TreeNode* p, vector<TreeNode*> &path){
+        if(!root)   return false;
+        
+        path.push_back(root);
         if(root == p){
+            // path.push_back(p);
             return true;
         }
-        int isLeft = fn(root->left, p, p1);
-        int isRight = fn(root->right, p, p1);
-        if(isLeft || isRight){
-            return true;
-        }
-        p1.pop_back();
+
+        if(fn(root->left, p, path) || fn(root->right, p, path)) return true;
+
+        path.pop_back();
+
         return false;
     }
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode*> p1, p2;
 
-        fn(root, p, p1);
-        fn(root, q, p2);
-        TreeNode* lca = NULL;
-        for(int i=0, j= 0; i < p1.size() && j< p2.size(); i++, j++){
-            if(p1[i] != p2[j]){
-                return lca;
-            }
-            lca = p1[i];
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        vector<TreeNode*> path1, path2;
+        
+        fn(root, p, path1);
+        fn(root, q, path2);
+
+        int len = min(path1.size(), path2.size());
+
+        for(int i = len-1; i>=0; --i){
+            if(path1[i] == path2[i])    return path1[i];
         }
-        return lca;
+        return NULL;
     }
 };
