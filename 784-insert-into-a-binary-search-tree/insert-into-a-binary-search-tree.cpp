@@ -11,34 +11,31 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root, vector<int> &vec){
+    void preorder(TreeNode* root, vector<int> &arr){
         if(!root)   return;
-        if(root->left)  inorder(root->left, vec);
-        vec.push_back(root->val);
-        if(root->right) inorder(root->right, vec);
+        preorder(root->left, arr);
+        arr.push_back(root->val);
+        preorder(root->right, arr);
     }
 
-    TreeNode* buildTree(vector<int> &nums, int st, int en){
-        if(st > en)  return NULL;
+    TreeNode* fn(vector<int> &arr, int st, int en){
+        if(st > en)    return NULL;
 
-        int mid = st + (en - st)/2;
-        TreeNode* node = new TreeNode(nums[mid]);
-        node->left = buildTree(nums, st, mid-1);
-        node->right = buildTree(nums, mid+1, en);
-        
+        int mid = st + (en- st)/2;
+        TreeNode* node = new TreeNode(arr[mid]);
+        node->left = fn(arr, st, mid-1);
+        node->right = fn(arr, mid+1, en);
+
         return node;
     }
 
     TreeNode* insertIntoBST(TreeNode* root, int val) {
-        // get its inorder o(n)
-        // add val and sort the element o(nlogn)
-        // then build the tree again o(n) 
-        // total o(2n + nlogn)
-        vector<int> vec;
-        inorder(root, vec);
-        vec.push_back(val);
-        sort(vec.begin(), vec.end());
-        return buildTree(vec, 0, vec.size()-1);
-        
+        vector<int> arr;
+        preorder(root, arr);
+        arr.push_back(val);
+        sort(arr.begin(), arr.end());
+        return fn(arr, 0, arr.size()-1);
+        //lvl order = left, root, right
+        //root at mid
     }
 };
