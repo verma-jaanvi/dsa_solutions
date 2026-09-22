@@ -12,26 +12,20 @@
 class Solution {
 public:
     int fn(TreeNode* root, long long target){
-        if(!root){
-            return 0;
-        }
-
+        if(!root)   return 0;
         int count = 0;
         if(root->val == target){
             count++;
         }
-        
-        count += fn(root->left, target - root->val);
-        count += fn(root->right, target - root->val);
 
+        count += fn(root->left, target - root->val) + fn(root->right, target - root->val);
         return count;
-        
     }
 
     int pathSum(TreeNode* root, int targetSum) {
         if(!root)   return 0;
 
-        return fn(root, targetSum) + 
+        return fn(root, targetSum) +
         pathSum(root->left, targetSum) +
         pathSum(root->right, targetSum);
     }
