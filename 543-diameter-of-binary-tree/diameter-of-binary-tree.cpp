@@ -13,13 +13,12 @@ class Solution {
 public:
     int fn(TreeNode* root, int &maxi){
         if(!root)   return 0;
-        
 
         int lt = fn(root->left, maxi);
         int rt = fn(root->right, maxi);
-        maxi = max(maxi, rt + lt);
+        maxi = max(maxi, lt + rt);
 
-        return max(lt, rt) + 1;
+        return 1 + max(lt, rt);
     }
 
     int diameterOfBinaryTree(TreeNode* root) {
