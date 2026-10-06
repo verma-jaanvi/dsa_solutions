@@ -11,7 +11,7 @@ public:
             long long mid = low + (high - low)/2;
             int sum = 0;
             for(int i : nums){
-                sum += ceil((double)i/mid);
+                sum += (i + mid - 1)/ mid;
                 if(sum > threshold){
                     break;
                 }
