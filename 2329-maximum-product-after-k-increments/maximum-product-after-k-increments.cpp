@@ -16,12 +16,10 @@ public:
             k--;
         }
 
-        int pro = 1;
+        long long pro = 1;
+        long long mod = 1e9 + 7;
         while(!heap.empty()){
-            if((long long)heap.top() * pro > 1e9 + 7)  
-                pro = (1LL * pro * heap.top()) % 1000000007;
-            else
-                pro *= heap.top();
+            pro = (pro * heap.top()) % mod;
             heap.pop();
         }
 
