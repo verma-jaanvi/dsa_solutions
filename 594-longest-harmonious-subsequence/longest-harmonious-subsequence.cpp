@@ -2,15 +2,13 @@ class Solution {
 public:
     int findLHS(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        int maxi = 1, mini = 0;
+        int l = 0, r = 1;
         int ans = 0;
-        int n = nums.size();
-        while(maxi < n){
-            int diff = nums[maxi] - nums[mini];
-            if(diff == 1)   ans = max(ans, maxi - mini + 1);
-            if(diff <= 1)   maxi++;
-            else    mini++;
-
+        while(r< nums.size()){
+            int diff = nums[r] - nums[l];
+            if(diff == 1)   ans = max(ans, r-l+1);
+            if(diff <= 1)   r++;
+            else    l++;
         }
         return ans;
     }
